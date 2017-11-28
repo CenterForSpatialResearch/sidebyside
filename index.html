@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
+    <title>Leaflet Side-by-side</title>
+    <script src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet-src.js'></script>
+    <script src="leaflet-side-by-side.js"></script>
+    <link href='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css' rel='stylesheet' />
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div id='map'></div>
+
+    <script>
+    var map = L.map('map').setView([40.7127, -74.0059], 5);
+
+
+
+    //For the worldmap:
+    //var map = L.map('map').setView([30, 0], 3);
+
+    var nightlightsLayer = L.tileLayer('https://api.mapbox.com/styles/v1/gbasic/cjaju3rbdb5ic2sqaa0492l7e/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2Jhc2ljIiwiYSI6ImNpazFlZGt6ajM5a212eWtpankzaWFrZzMifQ.meNRnts4MkZYAWJWCuZSHw', {
+        attribution:
+            'NASA, Earth at Night',
+        minZoom: 1,
+        maxZoom: 13
+    }).addTo(map)
+
+
+    var gpwLayer = L.tileLayer('https://api.mapbox.com/styles/v1/gbasic/cjaiqj6vd97pj2rkabe364ume/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2Jhc2ljIiwiYSI6ImNpazFlZGt6ajM5a212eWtpankzaWFrZzMifQ.meNRnts4MkZYAWJWCuZSHw', {
+        attribution: 'CIESIN - Columbia University. 2016. Gridded Population of the World, Version 4'
+    }).addTo(map);
+
+
+
+
+
+    L.control.sideBySide(nightlightsLayer, gpwLayer).addTo(map);
+    </script>
+</body>
+</html>
